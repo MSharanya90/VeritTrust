@@ -1,0 +1,349 @@
+/* ==========================================================================
+   VeriTrust Cognitive Shield Enterprise Theme
+   Custom CSS3 Variables, Glassmorphism, and Cyber-Defense Color Palette
+   ========================================================================== */
+
+:root {
+  --bg-primary: #07090e;
+  --bg-secondary: #0d121d;
+  --bg-surface: #131b2e;
+  --bg-card: #0f1626;
+  --bg-card-hover: #17223b;
+  --bg-glass: rgba(15, 22, 38, 0.75);
+  
+  --border-subtle: #1e293b;
+  --border-hover: #334155;
+  --border-active: #3b82f6;
+  --border-glow: rgba(59, 130, 246, 0.25);
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-disabled: #475569;
+  
+  /* Brand Accents */
+  --electric-blue: #38bdf8;
+  --blue-primary: #2563eb;
+  --blue-hover: #1d4ed8;
+  --violet-accent: #8b5cf6;
+  --violet-glow: rgba(139, 92, 246, 0.25);
+  
+  /* Security Severity Colors */
+  --emerald-safe: #10b981;
+  --emerald-glow: rgba(16, 185, 129, 0.25);
+  --amber-warning: #f59e0b;
+  --amber-glow: rgba(245, 158, 11, 0.25);
+  --rose-high: #f43f5e;
+  --rose-glow: rgba(244, 63, 94, 0.25);
+  --crimson-critical: #ef4444;
+  --crimson-glow: rgba(239, 68, 68, 0.35);
+
+  --sidebar-width: 260px;
+  --topbar-height: 64px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+
+  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.45);
+  --shadow-glow-blue: 0 0 25px rgba(56, 189, 248, 0.2);
+  --shadow-glow-critical: 0 0 30px rgba(239, 68, 68, 0.3);
+}
+
+/* Global Reset & Base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+code, pre, .font-mono {
+  font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
+
+/* Glass Card Container */
+.veritrust-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  position: relative;
+}
+
+.veritrust-card:hover {
+  border-color: var(--border-hover);
+}
+
+.veritrust-card.glow-primary:hover {
+  border-color: var(--blue-primary);
+  box-shadow: var(--shadow-glow-blue);
+}
+
+.veritrust-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.veritrust-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Security Badges */
+.badge-risk {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-risk-low {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--emerald-safe);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.badge-risk-medium {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--amber-warning);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.badge-risk-high {
+  background: rgba(244, 63, 94, 0.15);
+  color: var(--rose-high);
+  border: 1px solid rgba(244, 63, 94, 0.35);
+}
+
+.badge-risk-critical {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border: 1px solid var(--crimson-critical);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.25);
+  animation: pulse-danger 2s infinite ease-in-out;
+}
+
+@keyframes pulse-danger {
+  0%, 100% { box-shadow: 0 0 5px rgba(239, 68, 68, 0.2); }
+  50% { box-shadow: 0 0 15px rgba(239, 68, 68, 0.5); }
+}
+
+/* Status Pills */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.status-active .status-dot { background: var(--emerald-safe); box-shadow: 0 0 8px var(--emerald-safe); }
+.status-idle .status-dot { background: var(--text-muted); }
+.status-blocked .status-dot { background: var(--crimson-critical); box-shadow: 0 0 8px var(--crimson-critical); }
+.status-review .status-dot { background: var(--amber-warning); box-shadow: 0 0 8px var(--amber-warning); }
+
+/* Buttons */
+.btn-veritrust-primary {
+  background: linear-gradient(135deg, var(--blue-primary) 0%, #1e40af 100%);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.btn-veritrust-primary:hover {
+  background: linear-gradient(135deg, var(--blue-hover) 0%, #1e3a8a 100%);
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
+  color: #fff;
+}
+
+.btn-veritrust-danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-veritrust-danger:hover {
+  background: rgba(239, 68, 68, 0.3);
+  color: #fff;
+  border-color: var(--crimson-critical);
+}
+
+.btn-veritrust-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-veritrust-outline:hover {
+  background: var(--bg-surface);
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+/* Form Controls */
+.form-veritrust-control {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: 0.6rem 0.85rem;
+  font-size: 0.9rem;
+  width: 100%;
+  transition: border-color var(--transition-fast);
+}
+
+.form-veritrust-control:focus {
+  outline: none;
+  border-color: var(--electric-blue);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+/* Data Tables */
+.veritrust-table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.veritrust-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.veritrust-table th {
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.veritrust-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.veritrust-table tr:hover td {
+  background: var(--bg-card-hover);
+}
+
+/* Metric Display Numbers */
+.metric-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.metric-label {
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  margin-top: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Highlight Spans in Prompt Inspection */
+.highlight-threat {
+  background: rgba(239, 68, 68, 0.35);
+  border-bottom: 2px solid var(--crimson-critical);
+  color: #fca5a5;
+  padding: 0 3px;
+  border-radius: 2px;
+  cursor: help;
+}
+
+.highlight-secret {
+  background: rgba(245, 158, 11, 0.35);
+  border-bottom: 2px solid var(--amber-warning);
+  color: #fcd34d;
+  padding: 0 3px;
+  border-radius: 2px;
+}
+

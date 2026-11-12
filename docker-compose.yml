@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: veritrust-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: veritrust_user
+      POSTGRES_PASSWORD: veritrust_secure_pass
+      POSTGRES_DB: veritrust
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U veritrust_user -d veritrust"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: veritrust-backend
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql://veritrust_user:veritrust_secure_pass@db:5432/veritrust
+      - SECRET_KEY=enterprise-secret-key-production-veritrust-2026-auth-shield
+      - ACCESS_TOKEN_EXPIRE_MINUTES=120
+      - REFRESH_TOKEN_EXPIRE_DAYS=14
+      - CORS_ORIGINS=http://localhost:5173,http://localhost:3000,http://localhost:80
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: veritrust-frontend
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+
