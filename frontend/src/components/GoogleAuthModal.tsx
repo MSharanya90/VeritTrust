@@ -346,3 +346,4 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({ isOpen, onClos
     </div>
   );
 };
+

@@ -114,3 +114,4 @@ Once deployed, you can immediately log in or test self-registration and Google S
 | **Threat Analyst** | `analyst@veritrust.io` | `Analyst@123456` |
 | **Self-Registration** | Any email & password | Any password $\ge 6$ chars |
 | **Google SSO** | Click **Continue with Google** | One-click auto-provisioning |
+
