@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { WebSocketProvider } from './context/WebSocketContext';
 import { MainLayout } from './layouts/MainLayout';
@@ -86,13 +86,13 @@ export const AppContent: React.FC = () => {
 
 export const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <AuthProvider>
         <WebSocketProvider>
           <AppContent />
         </WebSocketProvider>
       </AuthProvider>
-    </BrowserRouter>
+    </Router>
   );
 };
 
